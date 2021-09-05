@@ -1,4 +1,4 @@
-package util
+package fyneutil
 
 func maxF32(base, other float32) float32 {
 	if other > base {

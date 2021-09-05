@@ -1,4 +1,4 @@
-package util
+package fyneutil
 
 import (
 	"image/color"

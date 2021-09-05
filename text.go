@@ -1,4 +1,4 @@
-package util
+package fyneutil
 
 import (
 	"fyne.io/fyne/v2"

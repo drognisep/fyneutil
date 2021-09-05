@@ -118,6 +118,26 @@ func TestBoxPadding(t *testing.T) {
 	}
 }
 
+func TestSizeAccumulation(t *testing.T) {
+	defer func() {
+	    if r := recover(); r != nil {
+	        debug.PrintStack()
+	        t.Fatalf("Panic recovered: %v\n", r)
+	    }
+	}()
+	assert := testify.New(t)
+
+	obj1 := newTestCanvasObject(0, 0, 5, 10)
+	obj2 := newTestCanvasObject(0, 0, 7, 8)
+	obj3 := newTestCanvasObject(0, 0, 15, 2)
+
+	height := AccumulateHeight(obj1.MinSize(), obj2.MinSize(), obj3.MinSize())
+	assert.Equal(fyne.NewSize(15, 10 + 8 + 2), height)
+
+	width := AccumulateWidth(obj1.MinSize(), obj2.MinSize(), obj3.MinSize())
+	assert.Equal(fyne.NewSize(5 + 7 + 15, 10), width)
+}
+
 var _ fyne.CanvasObject = (*testCanvasObject)(nil)
 type testCanvasObject struct {
 	posX    float32

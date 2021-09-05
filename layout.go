@@ -193,3 +193,27 @@ func VBoxPadding(horizontal, vertical, spacing float32, objs... fyne.CanvasObjec
 	}
 	return container.New(l, objs...)
 }
+
+func AccumulateHeight(sizes... fyne.Size) fyne.Size {
+	var height float32
+	var minWidth float32
+	for _, sz := range sizes {
+		height += sz.Height
+		if minWidth < sz.Width {
+			minWidth = sz.Width
+		}
+	}
+	return fyne.NewSize(minWidth, height)
+}
+
+func AccumulateWidth(sizes... fyne.Size) fyne.Size {
+	var width float32
+	var minHeight float32
+	for _, sz := range sizes {
+		width += sz.Width
+		if minHeight < sz.Height {
+			minHeight = sz.Height
+		}
+	}
+	return fyne.NewSize(width, minHeight)
+}
